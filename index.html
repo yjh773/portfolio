@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>尹俊皓 · 全栈影像创作者</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23131210'/%3E%3Cpath d='M8 9l13 7-13 7z' fill='%23C89B5A'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+:root{
+  --bg:#131210; --bg2:#1d1b17; --bg3:#26231e;
+  --ink:#ece7dc; --muted:#948e82; --faint:#6a655b;
+  --gold:#c89b5a; --gold-soft:#d8b580; --teal:#5e7a86;
+  --line:rgba(236,231,220,.12); --line2:rgba(236,231,220,.2);
+  --serif:"Noto Serif SC",Georgia,"Songti SC",serif;
+  --display:"Cormorant Garamond","Noto Serif SC",Georgia,serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --r:3px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-weight:300;line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:700;line-height:1.25;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+::selection{background:var(--gold);color:#131210}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;position:relative;z-index:2}
+.en{font-family:var(--display)}
+.kicker{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.32em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:22px}
+.muted{color:var(--muted)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .35s,border-color .35s;
+  border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(19,18,16,.92);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+.nav-inner{max-width:1240px;margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:.08em;display:flex;align-items:center;gap:10px}
+.brand svg{width:18px;height:18px}
+.nav-links{display:flex;gap:34px;align-items:center}
+.nav-links a{font-size:13px;font-weight:400;color:var(--muted);letter-spacing:.06em;position:relative;padding:6px 0;transition:color .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px}
+.nav-toggle span{width:24px;height:1.5px;background:var(--ink);transition:.3s}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:13px;font-weight:500;
+  letter-spacing:.08em;padding:13px 26px;border:1px solid var(--line2);border-radius:var(--r);
+  cursor:pointer;transition:.25s;background:transparent;color:var(--ink)}
+.btn:hover{border-color:var(--gold);color:var(--gold)}
+.btn.solid{background:var(--gold);border-color:var(--gold);color:#17140f}
+.btn.solid:hover{background:var(--gold-soft);border-color:var(--gold-soft);color:#17140f}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:120px 0 80px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+.hero h1{font-size:clamp(34px,5vw,58px);font-weight:900;letter-spacing:.01em;margin-bottom:8px}
+.hero h1 .en{display:block;font-size:clamp(20px,2.4vw,30px);font-weight:600;color:var(--gold);margin-top:14px;letter-spacing:.02em}
+.hero p.lead{font-size:16px;color:var(--muted);max-width:480px;margin:26px 0 36px}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+.hero-visual{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+.hero-visual video{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--bg2)}
+.hero-stats{display:flex;gap:0;margin-top:46px;border-top:1px solid var(--line)}
+.hero-stats .st{flex:1;padding:20px 18px 0 0}
+.hero-stats .st + .st{border-left:1px solid var(--line);padding-left:22px}
+.hero-stats .num{font-family:var(--display);font-size:34px;font-weight:700;color:var(--gold);line-height:1}
+.hero-stats .lab{font-size:11px;color:var(--muted);letter-spacing:.14em;margin-top:8px}
+
+/* ---------- sections ---------- */
+.section{padding:110px 0;position:relative}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:54px;gap:30px;flex-wrap:wrap}
+.section-head h2{font-size:clamp(26px,3.4vw,38px);font-weight:900}
+.section-head .desc{color:var(--muted);max-width:420px;font-size:14px}
+
+/* series index */
+.series-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.series-cell{background:var(--bg);padding:42px 38px;cursor:pointer;transition:background .3s;position:relative;min-height:230px;display:flex;flex-direction:column}
+.series-cell:hover{background:var(--bg2)}
+.series-cell .idx{font-family:var(--display);font-size:15px;color:var(--gold);letter-spacing:.1em;margin-bottom:18px}
+.series-cell h3{font-size:23px;margin-bottom:12px}
+.series-cell p{font-size:13px;color:var(--muted);flex:1}
+.series-cell .meta{font-size:12px;color:var(--faint);margin-top:20px;letter-spacing:.05em}
+
+/* work blocks */
+.work-block{margin-bottom:96px}
+.work-block>header{display:flex;align-items:baseline;gap:18px;margin-bottom:30px;border-bottom:1px solid var(--line);padding-bottom:18px}
+.work-block>header .no{font-family:var(--display);font-size:15px;color:var(--gold)}
+.work-block>header h3{font-size:27px;font-weight:700}
+.work-block>header .tag{margin-left:auto;font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+.feat-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+.thumb{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);cursor:pointer;background:var(--bg2)}
+.thumb video{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;transition:transform .5s,opacity .3s}
+.thumb:hover video{transform:scale(1.04)}
+.thumb .cap{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 14px;
+  background:linear-gradient(to top,rgba(15,14,12,.94),transparent)}
+.thumb .cap h4{font-size:16px;font-weight:700}
+.thumb .cap .d{font-size:11px;color:var(--gold);margin-top:5px;letter-spacing:.05em}
+.big{grid-column:span 7}.small{grid-column:span 5}
+.thumb.small video,.thumb.big video{aspect-ratio:16/9}
+.mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+.mini-card{border:1px solid var(--line);border-radius:var(--r);background:var(--bg2);cursor:pointer;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}
+.mini-card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.mini-card .cover{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bg3)}
+.mini-card .cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s}
+.mini-card:hover .cover img{transform:scale(1.06)}
+.mini-card .cover .n{position:absolute;top:9px;left:11px;font-family:var(--display);color:var(--gold);font-size:14px;text-shadow:0 1px 7px rgba(0,0,0,.7)}
+.mini-card .info{padding:12px 14px 14px}
+.mini-card .info h4{font-size:13px;font-weight:500;margin:0 0 6px;line-height:1.5}
+.mini-card .info .m{font-size:11px;color:var(--faint)}
+.mini-card .info .play{font-size:11px;color:var(--gold);margin-top:10px;letter-spacing:.1em}
+.mini-card.mini-ph{padding:18px 16px;display:block}
+.mini-card.mini-ph .n{font-family:var(--display);color:var(--gold);font-size:14px}
+.mini-card.mini-ph h4{font-size:13px;font-weight:500;margin:8px 0 6px;line-height:1.5}
+
+/* filter */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.chip{font-family:var(--sans);font-size:12px;padding:8px 18px;border:1px solid var(--line2);border-radius:30px;
+  background:transparent;color:var(--muted);cursor:pointer;transition:.2s}
+.chip:hover{color:var(--ink);border-color:var(--gold)}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#17140f;font-weight:500}
+
+/* ---------- about / timeline ---------- */
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px}
+.skill-list{display:flex;flex-direction:column;gap:1px}
+.skill{border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;background:var(--bg2)}
+.skill h4{font-size:16px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.skill h4 .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;flex:none}
+.skill p{font-size:13px;color:var(--muted)}
+.skill .tools{font-size:11px;color:var(--gold);margin-top:10px;letter-spacing:.04em}
+.timeline{position:relative;display:flex;flex-direction:column}
+.tl{display:grid;grid-template-columns:96px 28px 1fr;gap:0;padding-bottom:38px}
+.tl:last-child{padding-bottom:0}
+.tl .when{font-family:var(--display);font-size:15px;color:var(--gold);padding-top:2px}
+.tl .axis{position:relative;display:flex;justify-content:center}
+.tl .axis::before{content:"";position:absolute;top:8px;bottom:-6px;width:1px;background:var(--line2)}
+.tl:last-child .axis::before{display:none}
+.tl .dot{width:11px;height:11px;border:2px solid var(--gold);border-radius:50%;background:var(--bg);margin-top:5px;z-index:1}
+.tl .body h4{font-size:16px;margin-bottom:5px}
+.tl .body p{font-size:13px;color:var(--muted)}
+
+.edu-cert{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px}
+.ec-card{border:1px solid var(--line);border-left:2px solid var(--gold);border-radius:var(--r);padding:24px;background:var(--bg2)}
+.ec-card h4{font-size:15px;margin-bottom:8px}
+.ec-card p{font-size:13px;color:var(--muted)}
+
+/* ---------- contact ---------- */
+.contact{text-align:center;padding:130px 0}
+.contact h2{font-size:clamp(30px,4.4vw,48px);font-weight:900;margin-bottom:20px}
+.contact p{color:var(--muted);max-width:520px;margin:0 auto 40px}
+.contact-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--faint);font-size:12px;letter-spacing:.08em}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(10,9,8,.96);display:none;align-items:center;justify-content:center;padding:50px}
+.modal.open{display:flex}
+.modal-box{width:100%;max-width:960px}
+.modal-box video{width:100%;max-height:72vh;background:#000;border-radius:var(--r)}
+.modal-meta{padding:22px 4px 0;display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.modal-meta h3{font-size:20px}
+.modal-meta .data{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--gold)}
+.modal-meta .data span b{color:var(--ink);font-weight:500;margin-left:4px}
+.modal-close{position:absolute;top:26px;right:32px;width:46px;height:46px;font-family:var(--sans);border:1px solid var(--line2);
+  border-radius:50%;background:transparent;color:var(--ink);font-size:20px;cursor:pointer;transition:.25s}
+.modal-close:hover{border-color:var(--gold);color:var(--gold)}
+.ext-link{font-size:12px;color:var(--teal);margin-top:12px;display:inline-flex;gap:8px;align-items:center}
+.ext-link:hover{color:var(--gold-soft)}
+
+.toast{position:fixed;bottom:36px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg3);
+  border:1px solid var(--gold);color:var(--ink);padding:13px 26px;border-radius:var(--r);font-size:13px;
+  opacity:0;pointer-events:none;transition:.3s;z-index:120}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.view{display:none}.view.active{display:block}
+.fade{animation:fade .6s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+@media(max-width:900px){
+  .wrap,.nav-inner{padding-left:22px;padding-right:22px}
+  .hero-grid,.about-grid{grid-template-columns:1fr;gap:40px}
+  .hero-visual{max-width:380px}
+  .big,.small{grid-column:span 12}
+  .mini-grid{grid-template-columns:repeat(2,1fr)}
+  .series-grid{grid-template-columns:1fr}
+  .edu-cert{grid-template-columns:1fr}
+  .nav-links{position:fixed;top:68px;right:0;left:0;background:rgba(19,18,16,.98);flex-direction:column;
+    gap:0;padding:10px 0;transform:translateY(-130%);transition:transform .35s;border-bottom:1px solid var(--line)}
+  .nav-links.open{transform:translateY(0)}
+  .nav-links a{padding:16px 26px;width:100%}
+  .nav-toggle{display:flex}
+  .section{padding:74px 0}
+  .hero-stats{flex-wrap:wrap}.hero-stats .st{min-width:50%}
+  .modal{padding:24px}.modal-close{top:16px;right:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 导航 ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#home" data-route="home">
+      <svg viewBox="0 0 32 32"><path d="M8 9l13 7-13 7z" fill="#C89B5A"/></svg>
+      尹俊皓
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" data-route="home" class="active">首页</a>
+      <a href="#work" data-route="work">作品</a>
+      <a href="#about" data-route="about">关于</a>
+      <a href="#contact" data-route="contact">联系</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main>
+<!-- ===== 视图：首页 ===== -->
+<section class="view active" id="view-home">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">Full-stack Visual Storyteller</div>
+          <h1>把想法变成影像
+            <span class="en">From camera to VFX to AI.</span>
+          </h1>
+          <p class="lead">从实拍、特效到 AI 生成，一个人就是一支制作团队。工具随时代变化，我始终在做同一件事——用视听讲故事，并让它被看见。</p>
+          <div class="hero-cta">
+            <a class="btn solid" href="#work" data-route="work">查看作品</a>
+            <a class="btn" href="#contact" data-route="contact">联系我</a>
+          </div>
+          <div class="hero-stats">
+            <div class="st"><div class="num">625w+</div><div class="lab">AIGC 双平台播放</div></div>
+            <div class="st"><div class="num">365w</div><div class="lab">单条最高播放</div></div>
+            <div class="st"><div class="num">7/7</div><div class="lab">AIGC 全爆款</div></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <video src="https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/01.mp4" poster="https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/img/p_aigc1.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:40px">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Selected Work</div>
+          <h2>精选作品</h2>
+        </div>
+        <p class="desc">四个项目系列，覆盖 AIGC、特效、剪辑与实拍。点击任意作品即可播放。</p>
+      </div>
+      <div id="homeFeat"></div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:20px">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">Series</div><h2>作品系列</h2></div>
+      </div>
+      <div class="series-grid" id="seriesGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：作品 ===== -->
+<section class="view" id="view-work">
+  <div class="section" style="padding-top:140px">
+    <div class="wrap">
+      <div class="kicker">Work</div>
+      <h1 style="font-size:clamp(30px,4vw,46px);margin-bottom:14px">作品全集</h1>
+      <p class="muted" style="max-width:560px;margin-bottom:60px">按项目系列组织。每个作品标注它体现的能力，剪辑、调色与方法论贯穿其中。</p>
+      <div id="workBlocks"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：关于 ===== -->
+<section class="view" id="view-about">
+  <div class="section" style="padding-top:140px">
+    <div class="wrap">
+      <div class="kicker">About</div>
+      <h1 style="font-size:clamp(30px,4vw,46px);margin-bottom:50px">关于我</h1>
+      <div class="about-grid">
+        <div>
+          <h3 style="font-size:20px;margin-bottom:22px">能力矩阵</h3>
+          <div class="skill-list" id="skillList"></div>
+          <div class="edu-cert">
+            <div class="ec-card">
+              <h4>教育背景</h4>
+              <p>华南农业大学珠江学院<br>影视摄影与制作 · 全日制本科<br>2023.09 – 2027.07</p>
+            </div>
+            <div class="ec-card">
+              <h4>官方认证</h4>
+              <p>商汤科技 Seko AI 平台<br>官方认证「先锋创作者」<br>账号 NIKI-AIGC</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size:20px;margin-bottom:26px">成长弧光</h3>
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：联系 ===== -->
+<section class="view" id="view-contact">
+  <div class="contact">
+    <div class="wrap">
+      <div class="kicker">Contact</div>
+      <h2>让我们一起，<br>把故事变成影像</h2>
+      <p>欢迎 AIGC、影视后期、剪辑与摄影摄像方向的合作与机会。以下是我的作品主页与联系方式入口。</p>
+      <div class="contact-links" id="contactLinks"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 尹俊皓 YIN JUNHAO · 全栈影像创作者 · 本站作品均为真实创作</div>
+</footer>
+
+<!-- ===== 视频弹窗 ===== -->
+<div class="modal" id="modal">
+  <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+  <div class="modal-box">
+    <video id="modalVideo" controls playsinline preload="none"></video>
+    <div class="modal-meta">
+      <div>
+        <h3 id="modalTitle"></h3>
+        <a class="ext-link" id="modalLink" target="_blank" rel="noopener"></a>
+      </div>
+      <div class="data" id="modalData"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DB = {
+ "aigc": [
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/01.mp4",
+   "title": "勇次郎 vs 郭海皇",
+   "note": "绝对力量 vs 绝对技巧；借刃牙 IP 起号的首部作品，登顶 B 站全站热门",
+   "stats": [
+    [
+     "抖音播放",
+     "200w+"
+    ],
+    [
+     "抖音点赞",
+     "5.2w"
+    ],
+    [
+     "B站播放",
+     "90w+"
+    ],
+    [
+     "B站点赞",
+     "6.4w"
+    ],
+    [
+     "B站收藏",
+     "1.2w"
+    ]
+   ],
+   "hot": "登顶 B 站全站热门，与影视飓风并列上榜"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/02.mp4",
+   "title": "凯巴尔勺子戏法",
+   "note": "3D 二创，细节化的肢体与道具表演",
+   "stats": [
+    [
+     "B站播放",
+     "94.3w"
+    ],
+    [
+     "B站点赞",
+     "2.9w"
+    ],
+    [
+     "抖音播放",
+     "100w+"
+    ],
+    [
+     "B站收藏",
+     "3000+"
+    ]
+   ]
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/03.mp4",
+   "title": "烈海王 vs 宫本武藏",
+   "note": "剑客与格斗家的高速对决",
+   "stats": [
+    [
+     "B站播放",
+     "40.4w"
+    ],
+    [
+     "B站点赞",
+     "2.7w"
+    ],
+    [
+     "B站收藏",
+     "4000+"
+    ],
+    [
+     "抖音播放",
+     "10w+"
+    ]
+   ]
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/04.mp4",
+   "title": "愚地克巳 vs 原始人皮可",
+   "note": "现代格斗 vs 原始力量",
+   "stats": [
+    [
+     "B站播放",
+     "27.3w"
+    ],
+    [
+     "B站点赞",
+     "1.8w"
+    ],
+    [
+     "抖音播放",
+     "40w+"
+    ],
+    [
+     "抖音点赞",
+     "1w"
+    ]
+   ]
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/05.mp4",
+   "title": "奥利巴与玛利亚（文戏）",
+   "note": "以文戏展现角色情感，非格斗向的叙事尝试",
+   "stats": [
+    [
+     "B站播放",
+     "2.8w"
+    ],
+    [
+     "B站点赞",
+     "2000+"
+    ],
+    [
+     "抖音播放",
+     "2w+"
+    ]
+   ]
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/06.mp4",
+   "title": "宫本武藏 vs 花山熏",
+   "note": "剑豪与硬汉的正面碰撞",
+   "stats": [
+    [
+     "B站播放",
+     "5.9w"
+    ],
+    [
+     "B站点赞",
+     "6465"
+    ],
+    [
+     "抖音播放",
+     "10w+"
+    ],
+    [
+     "抖音点赞",
+     "5000"
+    ]
+   ]
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/07.mp4",
+   "title": "范马勇次郎父子大战前夕",
+   "note": "父子大战前的氛围铺垫",
+   "stats": [
+    [
+     "B站播放",
+     "1w+"
+    ],
+    [
+     "B站点赞",
+     "1000+"
+    ],
+    [
+     "抖音播放",
+     "1w+"
+    ]
+   ]
+  }
+ ],
+ "game": [
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game01.mp4",
+   "title": "世一开 forsaken 开挂 POV 剪辑",
+   "date": null,
+   "featured": true,
+   "plays": "100w+",
+   "likes": "5w+",
+   "comments": "1000+",
+   "collects": "3000+",
+   "url": "https://v.douyin.com/ze0Mma-lKOU/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game02.mp4",
+   "title": "奥特曼贝利亚恶搞（聊天记录开场）",
+   "date": null,
+   "featured": true,
+   "plays": "365w+",
+   "likes": "24w+",
+   "comments": "3.5w+",
+   "collects": "1.4w+",
+   "url": "https://v.douyin.com/gsXmyq87bDA/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game03.mp4",
+   "title": "KSCERATO 身法 × 迈克尔杰克逊",
+   "date": null,
+   "featured": true,
+   "plays": "100w+",
+   "likes": "5.8w+",
+   "comments": "800+",
+   "collects": "2000+",
+   "url": "https://v.douyin.com/FTeMOi72O2Q/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game04.mp4",
+   "title": "GTA 转场 × 实拍 U 盘 Mocha 跟踪",
+   "date": null,
+   "featured": true,
+   "plays": "7.3w",
+   "likes": "4000+",
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/hTpEY4CVVJY/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game05.mp4",
+   "title": "CSGO 人物跳舞（早期 AI 生成+AE 抠像）",
+   "date": null,
+   "featured": true,
+   "plays": "80w+",
+   "likes": "3w+",
+   "comments": "2000+",
+   "collects": "2000+",
+   "url": "https://v.douyin.com/SUxINJmJhV4/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game06.mp4",
+   "title": "“呵，弱者就是要忍受强者的侮辱与嘲笑”# cs2 ...",
+   "date": "04/05",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/HWoAMt_7-6I/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game07.mp4",
+   "title": "“张万森，来财了” ——《一闪一闪瘪捞仔》# cs...",
+   "date": "04/12",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/vPNlo0LPQJE/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game08.mp4",
+   "title": "憋老仔小气鬼。 “算了，憋老仔长命百岁” —《云边...",
+   "date": "08/29",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/urug-ZLDdMw/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game09.mp4",
+   "title": "听君一席话 胜读十年书# cs2 # 顶级文笔 #...",
+   "date": "05/22",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/7ftIcI_OSSM/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game10.mp4",
+   "title": "黑鲨，愿我们做生活的高手# cs2 # 顶级文笔",
+   "date": "01/18",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/VPbkNoUgnY8/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game11.mp4",
+   "title": "你们在笑什么？我只看见了一个绝望的艾鲁迪克。# c...",
+   "date": "05/23",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/DAhCg_WRltE/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game12.mp4",
+   "title": "这就是ai无法代替人类的原因...# cs2 # ...",
+   "date": "02/08",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/Ou1lkEC9FCc/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game13.mp4",
+   "title": "我尝试忘记你 可走到哪里都有你的影子 # cs2 ...",
+   "date": "09/10",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/gIBjywc94nU/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game14.mp4",
+   "title": "苍蝇头到底有多么绝望 才能跳出这样的舞步# cs2...",
+   "date": "05/24",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/fBqTX4ha9-U/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game15.mp4",
+   "title": "每月校园网魅力时刻...# cs2",
+   "date": "02/07",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/md6y_baeHss/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game16.mp4",
+   "title": "再问你一遍 高考一志报什么？# cs2 # 江南s...",
+   "date": "03/22",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/x5owOHWax2M/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game17.mp4",
+   "title": "注意 刘德华已经解封95%% # cs2 # 刘德...",
+   "date": "12/26",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/HHBGjWscT4k/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game18.mp4",
+   "title": "可恶..这就是获得神的力量...付出的代价吗......",
+   "date": "03/01",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/p7D2AEmxzns/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game19.mp4",
+   "title": "训练师donk军训成果展示 世一冷暴力# cs2 ...",
+   "date": "12/02",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/WtReUVBC7A4/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game20.mp4",
+   "title": "将军使用大狙击退敌人 人民集体欢呼。# cs2 #...",
+   "date": "01/07",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/UCxjIAVIOJo/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game21.mp4",
+   "title": "60秒不是我的极限...# cs2 # 残局",
+   "date": "05/27",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/R3NFDlnOwAo/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game22.mp4",
+   "title": "“你谎话连篇 我句句当真”# cs2 # 于小惠",
+   "date": "04/11",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/k12ArjuTYcc/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game23.mp4",
+   "title": "充满童真的歌曲 使我的大狙精准...# cs2 #...",
+   "date": "10/05",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/7gnIqVLwuu8/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game24.mp4",
+   "title": "经典回顾：broky幻想“天降龙狙”名场面# cs...",
+   "date": "07/07",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/IrhxeGDJn40/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game25.mp4",
+   "title": "尼..背身...变身达摩还是做不到吗?# cs2 ...",
+   "date": "03/09",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/v3wPOrz3bMo/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game26.mp4",
+   "title": "以父之名 两个人握着鼠标 怎么可能会失误# csg...",
+   "date": "04/28",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/UiygMyLHIkc/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game27.mp4",
+   "title": "自古忠孝两难全 冠军是你给父亲最好的礼物# csg...",
+   "date": "11/06",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/XyHplVSDbFk/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game28.mp4",
+   "title": "历史总会留下些什么 予以后人赞叹 # 奥拉夫 # ...",
+   "date": "10/16",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/eWaGsLPJxR0/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game29.mp4",
+   "title": "19年的森 放到现在 什么水平# csgo # s...",
+   "date": "03/27",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/QPrUQaasvj8/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game30.mp4",
+   "title": "阿达西 你不喜欢我的发布会 我的手段你是知道的# ...",
+   "date": "07/13",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/-1ATYOXNQFQ/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game31.mp4",
+   "title": "“爸爸，我能靠打cs撑起整个家了”# csgo #...",
+   "date": "12/10",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/Y2_DVyhKWp0/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game32.mp4",
+   "title": "“时隔九个月 铁板战神还是回来了”# jks # ...",
+   "date": "07/24",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/ire0PdhhSOY/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game33.mp4",
+   "title": "你也想来挑战“黄色闪光“吗？# csgo # g2...",
+   "date": "11/16",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/Y_g-vi4d3fM/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game34.mp4",
+   "title": "火沙鹰的神 “涨价”的神# csgo # niko...",
+   "date": "01/30",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/4DLRgEzL-5s/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game35.mp4",
+   "title": "经典永不过时 火沙鹰涨价位# csgo # hap...",
+   "date": "07/15",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/ay5zR3hTBIY/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game36.mp4",
+   "title": "记住《前12发只是警告》# csgo # karr...",
+   "date": "11/06",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/d0eR08DZz-A/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game37.mp4",
+   "title": "不是，职业比赛你这样子刀人？# csgo # si...",
+   "date": "03/25",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/fS0dKo9fBHc/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game38.mp4",
+   "title": "我先提前说好：快跑!# cs2 # 土耳其舞蹈 #...",
+   "date": "01/22",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/2Cr2k_5Cwuw/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game39.mp4",
+   "title": "少年，游戏固然好玩，但别忘了游戏外的世界也很美好#...",
+   "date": "03/26",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/5aE33dc4dcE/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game40.mp4",
+   "title": "男人最浪漫的方式：三十发的枪声 一声都不能少！# ...",
+   "date": "07/23",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/lNXEyAWybC4/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game41.mp4",
+   "title": "大师 听《that gilrl》真的能回到过去吗？...",
+   "date": "08/08",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/dm17VXKl_6w/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game42.mp4",
+   "title": "双向奔赴是长久的关键# cs2",
+   "date": "07/23",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/75MaE3b31-Q/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game43.mp4",
+   "title": "blast2024春决 donk的恐怖视角# do...",
+   "date": "10/15",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/6qaXteVVuhI/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game44.mp4",
+   "title": "我们自古以来 就对忠贞落寞的英雄有独特的敬意# c...",
+   "date": "09/25",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/qlH0vtRepvQ/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game45.mp4",
+   "title": "一己之力 占据半个职业圈扫转集锦的男人# tese...",
+   "date": "08/26",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/XQiHv_cTTc0/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game46.mp4",
+   "title": "“报告 中路马奇诺防线”# csgo # apex...",
+   "date": "02/02",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/nyWAiHPJjmA/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game47.mp4",
+   "title": "上天需要瞄准的神 于是诞生了ni...质疑！# c...",
+   "date": "12/31",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/wUq0_-mf2e8/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game48.mp4",
+   "title": "”如果那天我没上外场“# cs2 # twistz...",
+   "date": "08/28",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/IjhaGBeaU0U/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game49.mp4",
+   "title": "感情里的下等人 游戏里的普通人# varorant...",
+   "date": "12/28",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/_5XXRISWtI4/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game50.mp4",
+   "title": "我听到了神级特工的一级指挥# csgo # cs2...",
+   "date": "01/01",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/SR7MfOeLuVg/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game51.mp4",
+   "title": "孩子 这并不好枪...# cs2 # 牢大",
+   "date": "05/23",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/3EvWe15DPmU/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game52.mp4",
+   "title": "尽管生活不尽人意 但是...别瞎想_______!...",
+   "date": "12/23",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/Jb99G2bfLPw/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game53.mp4",
+   "title": "真正在意你的 永远不会让你失望# cs2",
+   "date": "05/02",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/q5stlUQkgwE/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game54.mp4",
+   "title": "天才能有很多个 可是simple只能有一个# si...",
+   "date": "01/27",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/6x73EPCLyPg/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game55.mp4",
+   "title": "勤奋 重复 大量的练习 是给每个普通人的成才机会#...",
+   "date": "08/22",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/NCofHA4Nxgg/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game56.mp4",
+   "title": "我死在了2023年的冬天# csgo # cs2",
+   "date": "09/26",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/tVF-wmzLOaQ/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game57.mp4",
+   "title": "有朋友何必在意输赢 快乐才是最终目标# cs2",
+   "date": "10/19",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/41P8elQfy9k/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game58.mp4",
+   "title": "朋友才是游戏的最高配置# cs2",
+   "date": "12/10",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/ksvyzbAX75Y/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game59.mp4",
+   "title": "又有谁能够与2022的黄色闪光匹敌呢？# mone...",
+   "date": "07/22",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/4fsHmHJLR4M/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game60.mp4",
+   "title": "小镇超绝鸡杀 想杀我只能等我自己打破门槛# csg...",
+   "date": "06/15",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/ITzqy-KvHLw/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game61.mp4",
+   "title": "这一次，我们不回家了 我们去哥本哈根！# csgo...",
+   "date": "12/20",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/WAS4Sm7LEBs/"
+  },
+  {
+   "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/game/game62.mp4",
+   "title": "这才是世界上最绝望的死法（真实事件）",
+   "date": "06/02",
+   "featured": false,
+   "plays": null,
+   "likes": null,
+   "comments": null,
+   "collects": null,
+   "url": "https://v.douyin.com/48Dkrf3Ui74/"
+  }
+ ],
+ "vfx": {
+  "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/vfx/henshin.mp4",
+  "title": "特摄变身",
+  "note": "约一周完成；AE 特效合成与关键帧综合展示",
+  "stats": [
+   [
+    "制作周期",
+    "约 1 周"
+   ],
+   [
+    "合成",
+    "After Effects"
+   ]
+  ],
+  "tools": "Trapcode Particular · Optical Flares · Mocha 跟踪 · 蒙版 · 关键帧"
+ },
+ "live": {
+  "local": "https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/live/wedding.mp4",
+  "title": "婚礼纪实",
+  "note": "单机位摄像；面对主持人未按流程的突发，后期用关键主持语重构开场",
+  "stats": [
+   [
+    "角色",
+    "单机位摄像"
+   ],
+   [
+    "交付",
+    "客户验收"
+   ]
+  ]
+ },
+ "thesis": {
+  "title": "破衡 · AIGC 科幻微电影",
+  "note": "3 人团队本人任组长，独立负责导演、分镜、特效；Seedance 2.5 流程：剧本→拆分镜→拟定资产→分镜生视频→剪辑",
+  "status": "制作中 · 预计 2027 春完成",
+  "theme": "资源枯竭的未来，超级智能体反噬人类，主角借旧 AI 击破失控系统；主题：AI 不能脱离人类控制"
+ },
+ "skills": [
+  [
+   "AIGC 全流程创作",
+   "剧本/分镜→资产→生视频→剪辑，节点工作流与 Agent 自动化、自建提示词库",
+   "NBP · GPT · Seedream · Seedance 2.5 · Kling · Wan 3.0"
+  ],
+  [
+   "影视特效合成",
+   "粒子、光效、跟踪、蒙版与关键帧，实拍与 CG 合成",
+   "After Effects · Trapcode · Optical Flares · Mocha"
+  ],
+  [
+   "剪辑与调色",
+   "贯穿 AIGC、商业片、游戏与毕设，精品长视频+爆点短视频双轨",
+   "PR · 剪映 · DaVinci Resolve"
+  ],
+  [
+   "摄影摄像与导演",
+   "分镜导演、单机位拍摄与现场调度",
+   "Sony A7M4"
+  ],
+  [
+   "MG 动画与包装",
+   "基础图形动画、特效文字与转场，贯穿全部社媒作品",
+   "After Effects"
+  ],
+  [
+   "爆款方法论",
+   "评论区共鸣信号→可行性评估→快速决策→全栈成片，跨赛道通用底层能力",
+   "多平台运营"
+  ]
+ ],
+ "timeline": [
+  [
+   "初二",
+   "最早的正反馈",
+   "在抖音发布照片获万级点赞，第一次确认\"我擅长这个\""
+  ],
+  [
+   "2024.03",
+   "游戏剪辑账号起步",
+   "自学 AE/PR，三天一更，约一年积累 3400 粉丝，衍生上百单付费代剪"
+  ],
+  [
+   "2025.03",
+   "停更观察期",
+   "判断纯游戏剪辑只提供娱乐，沉淀并等待 AI 时代到来"
+  ],
+  [
+   "2026.08",
+   "AIGC 账号启动",
+   "十天一更，两个月双平台约 625w 播放，7 条全部爆款"
+  ],
+  [
+   "2026.10",
+   "商汤认证先锋创作者",
+   "获官方认证与算力支持，推进毕设《破衡》"
+  ],
+  [
+   "2027 春",
+   "毕设与原创阶段",
+   "完成 AIGC 科幻微电影，并从二创过渡到原创角色"
+  ]
+ ],
+ "contacts": [
+  [
+   "AIGC · 抖音",
+   "https://v.douyin.com/Bi5ZhlxB0ME/"
+  ],
+  [
+   "AIGC · B站",
+   "https://b23.tv/0BkyVl5"
+  ],
+  [
+   "游戏剪辑 · 抖音",
+   "https://v.douyin.com/HzUIxvJWEtQ/"
+  ]
+ ]
+};
+
+/* ===== 注册表与工具 ===== */
+const REG = {};
+const $ = (s, p) => (p || document).querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function reg(key, o) { REG[key] = o; }
+function statsHtml(arr) { return (arr || []).map(s => `<span>${esc(s[0])}<b>${esc(s[1])}</b></span>`).join(''); }
+
+/* ===== 视频弹窗 ===== */
+const modal = $('#modal'), mv = $('#modalVideo');
+function openModal(o) {
+  mv.src = o.src;
+  $('#modalTitle').textContent = o.title;
+  $('#modalData').innerHTML = statsHtml(o.stats);
+  const link = $('#modalLink');
+  if (o.url) { link.textContent = '在原平台查看此作品'; link.href = o.url; link.style.display = ''; }
+  else { link.style.display = 'none'; }
+  modal.classList.add('open');
+}
+function closeModal() { modal.classList.remove('open'); mv.pause(); mv.removeAttribute('src'); mv.load(); }
+$('#modalClose').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ===== Toast ===== */
+const toast = $('#toast'); let tt;
+function showToast(msg) {
+  toast.textContent = msg; toast.classList.add('show');
+  clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+/* ===== 缩略图卡片 ===== */
+function thumb(key, span, sub) {
+  return `<div class="thumb ${span}" data-key="${key}">
+    <video src="${REG[key].src}" poster="${REG[key].poster}" muted autoplay loop playsinline preload="auto"></video>
+    <div class="cap"><h4>${esc(REG[key].title)}</h4><div class="d">${esc(sub || '')}</div></div>
+  </div>`;
+}
+function mini(key, n) {
+  const o = REG[key];
+  if (o.placeholder) {
+    return `<div class="mini-card mini-ph" data-toast="${esc(o.title)}：素材待补">
+      <div class="n">${esc(n)}</div><h4>${esc(o.title)}</h4><div class="m">${esc(o.sub || '')}</div><div class="play">待补充</div></div>`;
+  }
+  return `<div class="mini-card" data-key="${key}" ${o.featured ? 'data-featured="1"' : ''}>
+    <div class="cover"><img src="${o.poster}" alt="${esc(o.title)}" loading="lazy"><span class="n">${esc(n)}</span></div>
+    <div class="info"><h4>${esc(o.title)}</h4><div class="m">${esc(o.sub || '')}</div><div class="play">点击播放</div></div></div>`;
+}
+
+/* ===== 首页：精选 ===== */
+function buildHome() {
+  DB.aigc.forEach((a, i) => reg('aigc' + i, { src: a.local, poster: 'https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/img/p_aigc' + (i + 1) + '.jpg', title: a.title, stats: a.stats, note: a.note }));
+  DB.game.forEach((g, i) => reg('game' + i, { src: g.local, poster: 'https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/img/p_game' + (i + 1) + '.jpg', title: g.title, stats: [['播放', g.plays], ['点赞', g.likes]].filter(x => x[1]), url: g.url, featured: g.featured }));
+  reg('vfx', { src: DB.vfx.local, poster: 'https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/img/p_vfx.jpg', title: DB.vfx.title, stats: DB.vfx.stats, note: DB.vfx.note });
+  reg('live', { src: DB.live.local, poster: 'https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/img/p_live.jpg', title: DB.live.title, stats: DB.live.stats, note: DB.live.note });
+
+  $('#homeFeat').innerHTML = `<div class="feat-grid">
+    ${thumb('aigc0', 'big', 'AIGC · 登顶 B 站全站热门')}
+    ${thumb('game1', 'small', '游戏剪辑 · 365w 播放')}
+    ${thumb('vfx', 'small', 'AE 特效 · 特摄变身')}
+    ${thumb('aigc2', 'big', 'AIGC · 烈海王 vs 宫本武藏')}
+  </div>`;
+
+  const series = [
+    ['01', 'AIGC 动漫二创', '刃牙 3D 二创系列与科幻微电影，AIGC 全流程创作', '7 部作品 + 毕设《破衡》', 'aigc'],
+    ['02', 'FPS 游戏剪辑账号', '剪辑、MG 与爆款方法论，一年产出 62 条作品', '62 条 · 多条百万播放', 'game'],
+    ['03', 'AE 特效 / 特摄', '粒子、光效、跟踪与关键帧合成', '特效合成能力展示', 'vfx'],
+    ['04', '实拍 / 导演', '婚礼纪实与商业拍摄，分镜导演与现场调度', '单机位摄像 · 客户验收', 'live'],
+  ];
+  $('#seriesGrid').innerHTML = series.map(s =>
+    `<div class="series-cell" data-series="${s[4]}">
+      <div class="idx">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p><div class="meta">${s[3]}</div></div>`).join('');
+}
+
+/* ===== 作品全集 ===== */
+function buildWork() {
+  const blocks = [];
+
+  // 1. AIGC
+  let aigcMini = DB.aigc.slice(2).map((a, i) => mini('aigc' + (i + 2), '0' + (i + 3))).join('');
+  reg('thesis', { placeholder: true, title: DB.thesis.title, sub: DB.thesis.status });
+  aigcMini += mini('thesis', '08');
+  blocks.push(`<div class="work-block" id="blk-aigc">
+    <header><span class="no">01</span><h3>AIGC 动漫二创系列</h3><span class="tag">AIGC 导演 / 全流程</span></header>
+    <div class="feat-grid">${thumb('aigc0', 'big', DB.aigc[0].hot || '')}${thumb('aigc1', 'small', DB.aigc[1].note)}</div>
+    <div class="mini-grid">${aigcMini}</div>
+    <p class="muted" style="font-size:13px;margin-top:20px">${esc(DB.thesis.theme)}</p>
+  </div>`);
+
+  // 2. 游戏（带筛选）
+  const gm = DB.game.map((g, i) => mini('game' + i, String(i + 1).padStart(2, '0'))).join('');
+  blocks.push(`<div class="work-block" id="blk-game">
+    <header><span class="no">02</span><h3>FPS 游戏剪辑账号</h3><span class="tag">剪辑 / MG / 方法论</span></header>
+    <div class="filters">
+      <button class="chip on" data-filter="all">全部 62 条</button>
+      <button class="chip" data-filter="feat">代表作 5 条</button>
+    </div>
+    <div class="mini-grid" id="gameGrid">${gm}</div>
+  </div>`);
+
+  // 3. 特摄
+  blocks.push(`<div class="work-block" id="blk-vfx">
+    <header><span class="no">03</span><h3>AE 特效 / 特摄</h3><span class="tag">后期 / 特效合成</span></header>
+    <div class="feat-grid">${thumb('vfx', 'big', DB.vfx.tools)}</div>
+    <p class="muted" style="font-size:13px;margin-top:18px">${esc(DB.vfx.note)}</p>
+  </div>`);
+
+  // 4. 实拍
+  reg('shop1', { placeholder: true, title: '服装店商业片（一）', sub: '素材待补' });
+  reg('shop2', { placeholder: true, title: '服装店商业片（二）', sub: '素材待补' });
+  blocks.push(`<div class="work-block" id="blk-live">
+    <header><span class="no">04</span><h3>实拍 / 导演</h3><span class="tag">摄影摄像 / 导演</span></header>
+    <div class="feat-grid">${thumb('live', 'big', DB.live.note)}</div>
+    <div class="mini-grid">${mini('shop1', '02')}${mini('shop2', '03')}</div>
+  </div>`);
+
+  $('#workBlocks').innerHTML = blocks.join('');
+
+  // 筛选交互
+  document.querySelectorAll('[data-filter]').forEach(chip => chip.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach(c => c.classList.remove('on'));
+    chip.classList.add('on');
+    const mode = chip.dataset.filter;
+    $('#gameGrid').querySelectorAll('.mini-card').forEach(c => {
+      c.style.display = (mode === 'all' || c.dataset.featured) ? '' : 'none';
+    });
+  }));
+}
+
+/* ===== 关于 ===== */
+function buildAbout() {
+  $('#skillList').innerHTML = DB.skills.map(s =>
+    `<div class="skill"><h4><span class="dot"></span>${esc(s[0])}</h4>
+      <p>${esc(s[1])}</p><div class="tools">${esc(s[2])}</div></div>`).join('');
+  $('#timeline').innerHTML = DB.timeline.map(t =>
+    `<div class="tl"><div class="when">${esc(t[0])}</div>
+      <div class="axis"><span class="dot"></span></div>
+      <div class="body"><h4>${esc(t[1])}</h4><p>${esc(t[2])}</p></div></div>`).join('');
+}
+
+/* ===== 联系 ===== */
+function buildContact() {
+  $('#contactLinks').innerHTML = DB.contacts.map(c =>
+    `<a class="btn" target="_blank" rel="noopener" href="${c[1]}">${esc(c[0])}</a>`).join('');
+}
+
+/* ===== 事件委托 ===== */
+document.addEventListener('click', e => {
+  const keyEl = e.target.closest('[data-key]');
+  if (keyEl) { openModal(REG[keyEl.dataset.key]); return; }
+  const toastEl = e.target.closest('[data-toast]');
+  if (toastEl) { showToast(toastEl.dataset.toast); return; }
+  const serEl = e.target.closest('[data-series]');
+  if (serEl) {
+    location.hash = '#work';
+    setTimeout(() => { const t = $('#blk-' + serEl.dataset.series); if (t) t.scrollIntoView({ behavior: 'smooth' }); }, 80);
+  }
+});
+
+/* ===== 路由 ===== */
+function route() {
+  const h = (location.hash || '#home').slice(1).split('?')[0];
+  const name = ['home', 'work', 'about', 'contact'].includes(h) ? h : 'home';
+  document.querySelectorAll('.view').forEach(v => {
+    const on = v.id === 'view-' + name;
+    v.classList.toggle('active', on);
+    if (on) { v.classList.remove('fade'); void v.offsetWidth; v.classList.add('fade'); }
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.route === name));
+  $('#navLinks').classList.remove('open');
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+
+/* ===== 导航 ===== */
+window.addEventListener('scroll', () => $('#nav').classList.toggle('scrolled', window.scrollY > 30));
+$('#navToggle').addEventListener('click', () => $('#navLinks').classList.toggle('open'));
+
+/* ===== 初始化 ===== */
+buildHome(); buildWork(); buildAbout(); buildContact(); route();
+
+</script>
+</body>
+</html>
