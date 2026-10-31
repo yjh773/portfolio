@@ -94,14 +94,17 @@ img,video{display:block;max-width:100%}
 
 .feat-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
 .thumb{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);cursor:pointer;background:var(--bg2)}
-.thumb video{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;transition:transform .5s,opacity .3s}
-.thumb:hover video{transform:scale(1.04)}
+.thumb video,.thumb img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;transition:transform .5s,opacity .3s}
+.thumb:hover video,.thumb:hover img{transform:scale(1.04)}
+.thumb-play{position:absolute;top:50%;left:50%;width:54px;height:54px;transform:translate(-50%,-50%);border:1.5px solid rgba(236,231,220,.85);border-radius:50%;background:rgba(15,14,12,.42);transition:background .25s,border-color .25s}
+.thumb-play::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-42%,-50%);border-left:13px solid var(--ink);border-top:8px solid transparent;border-bottom:8px solid transparent}
+.thumb:hover .thumb-play{background:rgba(200,155,90,.55);border-color:var(--gold)}
 .thumb .cap{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 14px;
   background:linear-gradient(to top,rgba(15,14,12,.94),transparent)}
 .thumb .cap h4{font-size:16px;font-weight:700}
 .thumb .cap .d{font-size:11px;color:var(--gold);margin-top:5px;letter-spacing:.05em}
 .big{grid-column:span 7}.small{grid-column:span 5}
-.thumb.small video,.thumb.big video{aspect-ratio:16/9}
+.thumb.small video,.thumb.big video,.thumb.small img,.thumb.big img{aspect-ratio:16/9}
 .mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
 .mini-card{border:1px solid var(--line);border-radius:var(--r);background:var(--bg2);cursor:pointer;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}
 .mini-card:hover{border-color:var(--gold);transform:translateY(-3px)}
@@ -243,7 +246,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:v
           </div>
         </div>
         <div class="hero-visual">
-          <video src="https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/01.mp4" poster="https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/img/p_aigc1.jpg" muted loop playsinline autoplay preload="metadata"></video>
+          <video src="https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/aigc/01.mp4" poster="https://yjh-1520562160.cos.ap-guangzhou.myqcloud.com/media/img/p_aigc1.jpg" muted loop playsinline preload="none"></video>
         </div>
       </div>
     </div>
@@ -1344,7 +1347,7 @@ function showToast(msg) {
 /* ===== 缩略图卡片 ===== */
 function thumb(key, span, sub) {
   return `<div class="thumb ${span}" data-key="${key}">
-    <video src="${REG[key].src}" poster="${REG[key].poster}" muted autoplay loop playsinline preload="auto"></video>
+    <img src="${REG[key].poster}" alt="${esc(REG[key].title)}" loading="lazy"><span class="thumb-play" aria-hidden="true"></span>
     <div class="cap"><h4>${esc(REG[key].title)}</h4><div class="d">${esc(sub || '')}</div></div>
   </div>`;
 }
